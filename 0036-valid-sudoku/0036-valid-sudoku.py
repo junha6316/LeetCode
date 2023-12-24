@@ -1,41 +1,33 @@
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        self.board = board
-        
-        for x in range(9):
-            for y in range(9):
-                if not self._is_valid_in_row(x,y):
+        N = 9
+        # Use binary number to check previous occurrence
+        rows = [0] * N
+        cols = [0] * N
+        boxes = [0] * N
+
+        for r in range(N):
+            for c in range(N):
+                # Check if the position is filled with number
+                if board[r][c] == ".":
+                    continue
+
+                pos = int(board[r][c]) - 1
+
+                # Check the row
+                if rows[r] & (1 << pos):
                     return False
-                
-        for x in [0, 3, 6]:
-            for y in [0,3,6]:
-                tmp = []
-                for row in self.board[y:y+3]:
-                    tmp.extend([c for c in row[x: x+3] if c != "."])
-                
-                if len(set(tmp)) != len(tmp):
+                rows[r] |= (1 << pos)
+
+                # Check the column
+                if cols[c] & (1 << pos):
                     return False
-                
-                
-                
-                
-                
-                
-               
-        
-                
+                cols[c] |= (1 << pos)
+
+                # Check the box
+                idx = (r // 3) * 3 + c // 3
+                if boxes[idx] & (1 << pos):
+                    return False
+                boxes[idx] |= (1 << pos)
+
         return True
-                    
-    
-    
-    def _is_valid_in_row(self, x, y):
-        row = [c for c in self.board[y] if c != "."]
-        col = [row[x] for row in self.board if row[x] != "."]
-        
-        
-        # square inculded x,,y
-        
-        return len(row) == len(set(row)) and len(col) == len(set(col))
-        
-        
-        
