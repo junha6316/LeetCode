@@ -4,17 +4,16 @@ class Solution:
         answer = 0
         
         for num in num_set:
+            
             if num -1 not in num_set:
-                current_num = num
-                current_streak = 1
-                while current_num + 1 in num_set:    
-                    current_num += 1
-                    current_streak += 1
-                
-                answer = max(answer, current_streak)
-        
+                cur_num = num
+                local_streak = 1
+                while cur_num + 1 in num_set:
+                    local_streak += 1
+                    cur_num += 1
+                    
+                answer = max(answer, local_streak)
         return answer
-                
                 
             
         
