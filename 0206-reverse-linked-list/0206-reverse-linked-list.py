@@ -5,14 +5,14 @@ class ListNode:
         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev = None
+        cur = head
         
-        previous = None
-        current = head
-
-        while current:
-            next_node = current.next  # 다음 노드를 임시로 저장
-            current.next = previous  # 현재 노드의 다음을 이전 노드로 변경
-            previous = current  # 이전 노드를 현재 노드로 업데이트
-            current = next_node  # 현재 노드를 다음 노드로 이동
+        while cur:
+            next_node = cur.next
+            cur.next = prev
             
-        return previous
+            prev = cur
+            cur = next_node
+            
+        return prev
