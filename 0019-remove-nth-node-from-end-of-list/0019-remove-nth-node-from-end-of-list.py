@@ -5,36 +5,21 @@ class ListNode:
         self.next = next
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        length = self.getLength(head)
+        dummy = ListNode(0)
+        dummy.next = head
+        first = dummy
+        second = dummy
         
-        n = length - n
-        idx = 1
-        node = head
-        prev = None
-        
-        while node:
-            if n == idx:
-                if prev is None: 
-                    return head.next
-                elif node.next is None: # 맨처음 인덱스 제거시
-                    prev.next = None
-                    return head
-                elif prev.next and node.next:
-                    prev.next = node.next
-                    return head
+        for i in range(n+1):
+            first = first.next
             
-            idx += 1
-            prev = node
-            node = node.next
+        while first:
+            first = first.next
+            second = second.next
             
+        second.next = second.next.next
         
-    def getLength(self, head):
-        length = 1
-        node =head
-        while node:
-            length += 1
-            node = node.next
-        return length
+        return dummy.next
         
     
   
