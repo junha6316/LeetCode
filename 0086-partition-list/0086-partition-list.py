@@ -29,11 +29,6 @@ class Solution:
             t = prehead.next
             prehead.next = tmp[0]
             tmp[-1].next = t
-
-            
-            
-            
-        
                 
         return prehead.next
             
