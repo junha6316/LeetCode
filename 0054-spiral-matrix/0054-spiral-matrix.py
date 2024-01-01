@@ -1,45 +1,37 @@
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
-        self.answer =[]
-        mode = 1
-        while matrix:
-            if mode == 1:
-                self.mode1(matrix)
-                mode += 1
-            elif mode == 2:
-                self.mode2(matrix)
-                mode += 1
-            elif mode == 3:
-                self.mode3(matrix)
-                mode += 1
-            elif mode ==4:
-                self.mode4(matrix)
-                mode = 1
+        result = []
+        rows, columns = len(matrix), len(matrix[0])
+        
+        up = left = 0
+        right = columns -1 
+        down = rows -1
+        
+        while len(result) < rows * columns:
+            for col in range(left, right +1):
+                result.append(matrix[up][col])
                 
-        return self.answer
+            for row in range(up+1, down+1):
+                result.append(matrix[row][right])
+                
+            if up != down:
+                for col in range(right -1, left -1, -1):
+                    result.append(matrix[down][col])
+                    
+            
+            if left != right:
+                for row in range(down-1, up, -1):
+                    result.append(matrix[row][left])
+                
+            left += 1
+            right -=1
+            up += 1
+            down -= 1
+            
+        return result
+                
     
-    def mode1(self, matrix):
-        self.answer.extend(matrix.pop(0))
-        
-    def mode2(self, matrix):
-        tmp = []
-        
-        for row in matrix:
-            if  len(row) >0:
-                tmp.append(row.pop())
-        
-        self.answer.extend(tmp)
-    def mode3(self, matrix):
-        last_row = matrix.pop()
-        self.answer.extend(last_row[::-1])
-        
-    def mode4(self, matrix):
-        tmp = []
-        for idx in range(len(matrix)-1, -1, -1):
-            row = matrix[idx]
-            if len(row) > 0:
-                tmp.append(row.pop(0))
-        self.answer.extend(tmp)
+    
         
     
         
