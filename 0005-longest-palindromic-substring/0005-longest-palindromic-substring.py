@@ -8,11 +8,12 @@ class Solution:
         for i in range(N):
             dp[i][i] = True
             
-        for i in range(N-1):
-            if s[i] == s[i+1]:
-                dp[i][i+1] = True
-                answer = [i, i+1]
-                
+        for i in range(1, N):
+        
+            if s[i] == s[i-1]:
+                dp[i-1][i] = True
+                answer = [i-1, i]
+        
         for diff in range(2, N):
         
             for i in range(N-diff):
