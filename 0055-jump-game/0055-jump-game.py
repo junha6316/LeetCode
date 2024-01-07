@@ -1,13 +1,16 @@
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
         max_reach = 0
-        last_pos = len(nums) -1
-        for i in range(len(nums)-1, -1, -1):
-            if i + nums[i] >= last_pos:
-                last_pos = i
-        return last_pos ==0
         
-
+        for i in range(len(nums)):
+            if max_reach < i:
+                return False  # Return false if you're stuck before reaching the end
+            
+            max_reach = max(max_reach, i + nums[i])  # Update the maximum reach
+        
+        # Check if you've reached or exceeded the last index
+        return max_reach >= len(nums) - 1
+            
             
             
         
