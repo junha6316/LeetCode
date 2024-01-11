@@ -11,23 +11,24 @@ class Solution:
             else:
                 right = mid - 1
         
-        # Shift elements in circular manner, with the pivot element at index 0.
-        # Then perform a regular binary search
-        def shiftedBinarySearch(pivot_index, target):
-            shift = n - pivot_index
-            left, right = (pivot_index + shift) % n, (pivot_index - 1 + shift) % n
-
-            while left <= right:
-                mid = (left + right) // 2
-                if nums[(mid - shift) % n] == target:
-                    return (mid - shift) % n
-                elif nums[(mid - shift) % n] > target:
-                    right = mid - 1
-                else:
-                    left = mid + 1
-            return -1
+        rotate_num = left
+        
+        tmp = nums[left:] + nums[:left]
+        left, right = 0, n - 1
+        
+        while left <= right:
+            mid = (left + right) // 2
+            if tmp[mid] == target:
+                return (mid + rotate_num) % n
             
-        return shiftedBinarySearch(left, target)
+            elif tmp[mid] > target:
+                right = mid - 1
+                
+            elif tmp[mid] < target:
+                left = mid + 1
+        return -1
+        
+        
         
                 
                 
