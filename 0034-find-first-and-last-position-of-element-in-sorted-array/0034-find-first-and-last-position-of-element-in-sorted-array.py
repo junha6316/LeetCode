@@ -13,6 +13,7 @@ class Solution:
             while l <= r:
                 mid = (l+r) // 2
                 if nums[mid] >= target:
+                    # 같을 때도 오른쪽 범위를 버려서 왼쪽 끝을 찾음
                     r = mid - 1
                 else:
                     l = mid + 1
@@ -25,6 +26,7 @@ class Solution:
                 if nums[mid] > target:
                     r = mid - 1
                 else:
+                    # 같을 때는 왼쪽 범위를 버려서 오른쪽 끝을 찾음
                     l = mid + 1
             return r
                 
