@@ -1,26 +1,25 @@
 class Solution(object):
-    def combine(self, n, k):
-        def backtrack(curr, first_num):
-            if len(curr) == k:
-                ans.append(curr[:])
+     def combine(self, n, k):
+        answer = []
+        def btrk(cur):
+            if len(cur) == k:
+                answer.append(cur[:])
                 return
-
-            need = k - len(curr)
-            remain = n - first_num + 1
+            
+            last = cur[-1] 
+            need = k - len(cur)
+            remain = n - (last+1) + 1
             available = remain - need
             
-            for num in range(first_num, first_num + available + 1):
-                curr.append(num)
-                backtrack(curr, num + 1)
-                curr.pop()
-
-            return
-        
-        ans = []
-        backtrack([], 1)
-        return ans
-
-        
+            for i in range(last+1, last+1 + available +1):
+                cur.append(i)
+                btrk(cur)
+                cur.pop()
+                
+        for i in range(1, n+1):
+            btrk([i])
+        return answer
+            
         
         
         
