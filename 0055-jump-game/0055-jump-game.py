@@ -1,16 +1,11 @@
-class Solution:
-    def canJump(self, nums: List[int]) -> bool:
-        max_reach = 0
-        
+class Solution(object):
+    def canJump(self, nums):
+        max_reach =0
         for i in range(len(nums)):
-            if max_reach < i:
-                return False  # Return false if you're stuck before reaching the end
-            
-            max_reach = max(max_reach, i + nums[i])  # Update the maximum reach
+            max_reach = max(max_reach, nums[i] + i)
+            if max_reach >= len(nums)-1:
+                return True
+            if max_reach == i:
+                return False
         
-        # Check if you've reached or exceeded the last index
-        return max_reach >= len(nums) - 1
-            
-            
-            
         
